@@ -104,6 +104,94 @@
 
 		</div>
 		<div class="col-md-3">
+
+
+<p id="notice"><%= notice %></p>
+
+<table>
+  <thead>
+  
+  </thead>
+
+  <tbody>
+    <% @games.each do |game| %>
+      <tr>
+
+
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          <%= game.title%>
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        
+
+     <div class="card" style="width: 18rem;">
+  <img src=<%= game.poster%> class="card-img-top" alt="..." style ="width: 286px; height: 330px">
+  <div class="card-body">
+    <h5 class="card-title"><%= game.title%></h5>
+    <div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          Plot
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <%= game.plot%>
+      </div>
+    </div>
+  </div>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Rating: <%= game.rating%></li>
+  </ul>
+  <div class="card-body">
+    <a href=<%= game.imdb_link%> class="card-link">IMDb Page</a>
+  </div>
+
+  <div class="card-body">
+     <% if current_user.id == game.user_id%>
+        <%= link_to 'Edit', edit_game_path(game) %> | 
+        <%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%end%>
+  </div>
+</div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+     
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%# <%= link_to 'New Post', new_post_path %> 
+
+
+
 		</div>
 		<div class="col-md-3">
 		</div>

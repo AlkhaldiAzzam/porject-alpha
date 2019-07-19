@@ -1,2 +1,5 @@
-<h1>TvShows#new</h1>
-<p>Find me in app/views/tv_shows/new.html.erb</p>
+<h1>New TV Show</h1>
+<%= render 'form', tv_show: @tv_show %>
+
+<%= link_to 'Back', tv_shows_path %>
+

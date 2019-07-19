@@ -1,12 +1,34 @@
 
-
-
-
-<%if user_signed_in?%>
-
+<% if user_signed_in?%>
+<div>
 
 
 <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3" style = "text-align: center">
+        <h1>Movies</h1>
+		</div>
+		<div class="col-md-3" style = "text-align: center">
+        <h1>Games</h1>
+		</div>
+		<div class="col-md-3" style = "text-align: center">
+        <h1>Animes</h1>
+		</div>
+		<div class="col-md-3" style = "text-align: center">
+        <h1>TV Shows</h1>
+		</div>
+	</div>
+</div>
+
+</div>
+
+
+
+
+
+<div style= "height: auto;  border: 2px solid black; margin: 9px; padding: 5px">
+
+<div class="container-fluid" >
 	<div class="row">
 		<div class="col-md-12">
 		</div>
@@ -15,25 +37,21 @@
 		<div class="col-md-3">
 
 
-<p id="notice"><%= notice %></p>
 
 <table>
-  <thead>
-  
-  </thead>
-
-  <tbody>
-    <% @films.each.with_index do |film , i| %>
-      <tr>
+ 
+  <div >
+    <% @films.each do |film| %>
+      <div >
 
 
 <div id="accordion">
   <div class="card">
-    <div class="card-header" id="headingOne">
+    <div class="card-header btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="headingOne" style= "text-align: center; margin: 8px">
       <h5 class="mb-0">
-        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+        <h5>
           <%= film.title%>
-        </button>
+        </h5>
       </h5>
     </div>
 
@@ -47,10 +65,9 @@
     <h5 class="card-title"><%= film.title%></h5>
     <div id="accordion">
   <div class="card">
-    <div class="card-header" id="headingOne">
+    <div class="card-header " id="headingOne">
       <h5 class="mb-0">
-
-        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+        <button  class="btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
           Plot
         </button>
       </h5>
@@ -71,7 +88,7 @@
   </div>
 
   <div class="card-body">
-     <% if current_user.id == film.user_id%>
+    <%if user_signed_in? && current_user.id == film.user_id%> 
         <%= link_to 'Edit', edit_film_path(film) %> | 
         <%= link_to 'Destroy', film, method: :delete, data: { confirm: 'Are you sure?' } %>
         <%end%>
@@ -90,9 +107,9 @@
 
 
      
-      </tr>
+      </div>
     <% end %>
-  </tbody>
+  </div>
 </table>
 
 <br>
@@ -106,13 +123,10 @@
 		<div class="col-md-3">
 
 
-<p id="notice"><%= notice %></p>
+
 
 <table>
-  <thead>
   
-  </thead>
-
   <tbody>
     <% @games.each do |game| %>
       <tr>
@@ -120,11 +134,11 @@
 
 <div id="accordion">
   <div class="card">
-    <div class="card-header" id="headingOne">
+    <div class="card-header btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="headingOne" style= "text-align: center; margin: 8px">
       <h5 class="mb-0">
-        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+        <h5>
           <%= game.title%>
-        </button>
+        </h5>
       </h5>
     </div>
 
@@ -141,7 +155,7 @@
     <div class="card-header" id="headingOne">
       <h5 class="mb-0">
 
-        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+        <button class="btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
           Plot
         </button>
       </h5>
@@ -162,9 +176,100 @@
   </div>
 
   <div class="card-body">
-     <% if current_user.id == game.user_id%>
+    
+    <%if user_signed_in? && current_user.id == game.user_id%> 
         <%= link_to 'Edit', edit_game_path(game) %> | 
         <%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%end%>
+        
+
+  </div>
+</div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+     
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%# <%= link_to 'New Post', new_post_path %> 
+
+
+
+		</div>
+		<div class="col-md-3">
+
+
+<table>
+  <thead>
+  
+  </thead>
+
+  <tbody>
+    <% @animes.each.with_index do |anime | %>
+      <tr>
+
+
+<div id="accordion">
+  <div class="card">
+    <div class="card-header btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="headingOne" style= "text-align: center; margin: 8px">
+      <h5 class="mb-0">
+        <h5>
+          <%= anime.title%>
+        </h5>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        
+
+     <div class="card" style="width: 18rem;">
+  <img src=<%= anime.poster%> class="card-img-top" alt="..." style ="width: 286px; height: 330px">
+  <div class="card-body">
+    <h5 class="card-title"><%= anime.title%></h5>
+    <div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+
+        <button class="btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          Plot
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <%= anime.plot%>
+      </div>
+    </div>
+  </div>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Rating: <%= anime.rating%></li>
+  </ul>
+  <div class="card-body">
+    <a href=<%= anime.imdb_link%> class="card-link">IMDb Page</a>
+  </div>
+
+  <div class="card-body">
+     <% if user_signed_in? && current_user.id == anime.user_id%>
+        <%= link_to 'Edit', edit_anime_path(anime) %> | 
+        <%= link_to 'Destroy', anime, method: :delete, data: { confirm: 'Are you sure?' } %>
         <%end%>
   </div>
 </div>
@@ -194,21 +299,104 @@
 
 		</div>
 		<div class="col-md-3">
-		</div>
-		<div class="col-md-3">
+
+<table>
+  <thead>
+  
+  </thead>
+
+  <tbody>
+    <% @tv_shows.each.with_index do |tv_show | %>
+      <tr>
+
+
+<div id="accordion">
+  <div class="card">
+    <div class="card-header btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="headingOne" style= "text-align: center; margin: 8px">
+      <h5 class="mb-0">
+        <h5>
+          <%= tv_show.title%>
+        </h5>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        
+
+     <div class="card" style="width: 18rem;">
+  <img src=<%= tv_show.poster%> class="card-img-top" alt="..." style ="width: 286px; height: 330px">
+  <div class="card-body">
+    <h5 class="card-title"><%= tv_show.title%></h5>
+    <div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+
+        <button class="btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          Plot
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <%= tv_show.plot%>
+      </div>
+    </div>
+  </div>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Rating: <%= tv_show.rating%></li>
+  </ul>
+  <div class="card-body">
+    <a href=<%= tv_show.imdb_link%> class="card-link">IMDb Page</a>
+  </div>
+
+  <div class="card-body">
+     <% if user_signed_in? && current_user.id == tv_show.user_id%>
+        <%= link_to 'Edit', edit_tv_show_path(tv_show) %> | 
+        <%= link_to 'Destroy', tv_show, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%end%>
+  </div>
+</div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+     
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%# <%= link_to 'New Post', new_post_path %> 
+
+
 		</div>
 	</div>
 </div>
+</div>
+<%else %>
 
-<%else%>
 
 <div class="card" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
+    <h5 class="card-title">Oops</h5>
+    <h6 class="card-subtitle mb-2 text-muted">You are not logged in</h6>
+    <p class="card-text">Please log in to view your dashboard...</p>
+    <%= link_to('Log In', new_user_session_path )%> | 
+    <%= link_to('sign up', new_user_registration_path )%>
   </div>
 </div>
-<%end%>
+<%end %>

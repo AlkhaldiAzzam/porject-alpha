@@ -1,2 +1,83 @@
-<h1>Animes#index</h1>
-<p>Find me in app/views/animes/index.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<table>
+  <thead>
+  
+  </thead>
+
+  <tbody>
+    <% @animes.each.with_index do |anime | %>
+      <tr>
+
+
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          <%= anime.title%>
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        
+
+     <div class="card" style="width: 18rem;">
+  <img src=<%= anime.poster%> class="card-img-top" alt="..." style ="width: 286px; height: 330px">
+  <div class="card-body">
+    <h5 class="card-title"><%= anime.title%></h5>
+    <div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          Plot
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <%= anime.plot%>
+      </div>
+    </div>
+  </div>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Rating: <%= anime.rating%></li>
+  </ul>
+  <div class="card-body">
+    <a href=<%= anime.imdb_link%> class="card-link">IMDb Page</a>
+  </div>
+
+  <div class="card-body">
+     <% if current_user.id == anime.user_id%>
+        <%= link_to 'Edit', edit_anime_path(anime) %> | 
+        <%= link_to 'Destroy', anime, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%end%>
+  </div>
+</div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+     
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%# <%= link_to 'New Post', new_post_path %> 

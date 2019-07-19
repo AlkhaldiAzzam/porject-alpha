@@ -1,4 +1,4 @@
-class TvShowController < ApplicationController
+class AnimesController < ApplicationController
   def index
   end
 

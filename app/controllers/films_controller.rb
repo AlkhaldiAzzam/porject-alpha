@@ -1,4 +1,8 @@
 class FilmsController < ApplicationController
+
+  before_action :authenticate_user!
+
+
   def index
     @films = Film.all
   end
@@ -13,7 +17,8 @@ class FilmsController < ApplicationController
   end
 
   def edit
-  
+    @film = Film.find(params[:id])
+
   end
 
   def create
@@ -42,13 +47,22 @@ class FilmsController < ApplicationController
     end
   end
 
+  def destroy
+    @film = Film.find(params[:id])
+    @film.destroy
+    respond_to do |format|
+      format.html { redirect_to films_url, notice: 'Film was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
   def set_film
     @film = Film.find(params[:id])
   end
 
   def film_params
-    params.require(:film).permit(:title, :plot, :user_id , :rating , :poster , :trailer )
+    params.require(:film).permit(:title, :plot, :user_id , :rating , :poster , :trailer, :imdb_link )
   end
 
 end

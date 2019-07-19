@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :animes
   has_many :tv_shows
 
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 end

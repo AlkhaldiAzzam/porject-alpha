@@ -1,25 +1,8 @@
 Rails.application.routes.draw do
 
-  get 'animes/index'
-  get 'animes/show'
-  get 'animes/edit'
-  get 'animes/new'
-  get 'tv_shows/index'
-  get 'tv_shows/show'
-  get 'tv_shows/edit'
-  get 'tv_shows/new'
-  # get 'tv_show/index'
-  # get 'tv_show/show'
-  # get 'tv_show/edit'
-  # get 'tv_show/new'
-  # get 'anime/index'
-  # get 'anime/show'
-  # get 'anime/edit'
-  # get 'anime/new'
-  # get 'games/index'
-  # get 'games/show'
-  # get 'games/edit'
-  # get 'games/new'
+  root 'dashboards#index'
+  
+  resources :dashboards
   resources :films
   resources :games
   resources :animes
@@ -31,6 +14,7 @@ Rails.application.routes.draw do
     resources :games
   resources :animes
   resources :tv_shows
+  resources :dashboards
 
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

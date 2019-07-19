@@ -1,2 +1,6 @@
-<h1>Films#edit</h1>
-<p>Find me in app/views/films/edit.html.erb</p>
+<h1>Editing Film</h1>
+
+<%= render 'form', post: @film %>
+
+<%= link_to 'Show', @film %> |
+<%= link_to 'Back', films_path %>

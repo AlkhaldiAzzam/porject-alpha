@@ -22,7 +22,19 @@ class FilmsController < ApplicationController
   end
 
   def create
+    found = false
     @film = Film.new(film_params)
+
+    Film.all.each do |film|
+      if film.title == @film.title
+        found = true
+
+
+      
+    end
+  end
+
+if found == false
 
     respond_to do |format|
       if @film.save
@@ -33,8 +45,21 @@ class FilmsController < ApplicationController
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
+    @user = current_user
+    @user.films_id.push(@film.id.to_s)
+    @user.save
 
+  else 
+    redirect_to @film, notice: 'film was successfully created.'
+    
+
+    @user = current_user
+    @user.films_id.push(Film.find_by_title(@film.title).id.to_s)
+    @user.save
+    
   end
+  
+end
   def update
     respond_to do |format|
       if @film.update(film_params)
@@ -49,7 +74,9 @@ class FilmsController < ApplicationController
 
   def destroy
     @film = Film.find(params[:id])
-    @film.destroy
+  user = current_user
+  user.films_id.delete(@film.id)
+  user.save
     respond_to do |format|
       format.html { redirect_to films_url, notice: 'Film was successfully destroyed.' }
       format.json { head :no_content }

@@ -16,7 +16,20 @@ class GamesController < ApplicationController
   end
 
   def create
+   
+    found = false
     @game = Game.new(game_params)
+
+    Game.all.each do |game|
+      if game.title == @game.title
+        found = true
+
+
+      
+    end
+  end
+
+if found == false
 
     respond_to do |format|
       if @game.save
@@ -27,6 +40,19 @@ class GamesController < ApplicationController
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
+    @user = current_user
+    @user.games_id.push(@game.id.to_s)
+    @user.save
+
+  else 
+    redirect_to @game, notice: 'game was successfully created.'
+    
+
+    @user = current_user
+    @user.games_id.push(Game.find_by_title(@game.title).id.to_s)
+    @user.save
+    
+  end
 
   end
 
@@ -48,7 +74,9 @@ class GamesController < ApplicationController
 
   def destroy
     @game = Game.find(params[:id])
-    @game.destroy
+  user = current_user
+  user.games_id.delete(@game.id)
+  user.save
     respond_to do |format|
       format.html { redirect_to games_url, notice: 'game was successfully destroyed.' }
       format.json { head :no_content }

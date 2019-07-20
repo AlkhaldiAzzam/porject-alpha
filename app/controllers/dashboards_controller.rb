@@ -10,9 +10,41 @@ class DashboardsController < ApplicationController
 
 
 
-    @games = User.find(current_user.id).games.all
-    @animes = User.find(current_user.id).animes.all
-    @tv_shows = User.find(current_user.id).tv_shows.all
+    
+
+
+
+    games = User.find(current_user.id).games_id
+
+    @games = []
+
+    games.each{|elem| @games.push(Game.find(elem))}
+
+
+
+
+    
+
+
+    animes = User.find(current_user.id).animes_id
+
+    @animes = []
+
+    animes.each{|elem| @animes.push(Anime.find(elem))}
+
+
+
+
+
+
+    tv_shows = User.find(current_user.id).TvShows_id
+
+    @tv_shows = []
+
+    tv_shows.each{|elem| @tv_shows.push(TvShow.find(elem))}
+
+
+    
     end
   end
 end

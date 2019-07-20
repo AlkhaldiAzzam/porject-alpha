@@ -22,7 +22,20 @@ class AnimesController < ApplicationController
   end
 
   def create
+   
+    found = false
     @anime = Anime.new(anime_params)
+
+    Anime.all.each do |anime|
+      if anime.title == @anime.title
+        found = true
+
+
+      
+    end
+  end
+
+if found == false
 
     respond_to do |format|
       if @anime.save
@@ -33,6 +46,20 @@ class AnimesController < ApplicationController
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
+    @user = current_user
+    @user.animes_id.push(@anime.id.to_s)
+    @user.save
+
+  else 
+    redirect_to @anime, notice: 'anime was successfully created.'
+    
+
+    @user = current_user
+    @user.animes_id.push(Anime.find_by_title(@anime.title).id.to_s)
+    @user.save
+    
+  end
+
 
   end
   def update
@@ -48,8 +75,10 @@ class AnimesController < ApplicationController
   end
 
   def destroy
-    @anime = anime.find(params[:id])
-    @anime.destroy
+    @anime = Anime.find(params[:id])
+  user = current_user
+  user.animes_id.delete(@anime.id)
+  user.save
     respond_to do |format|
       format.html { redirect_to animes_url, notice: 'anime was successfully destroyed.' }
       format.json { head :no_content }

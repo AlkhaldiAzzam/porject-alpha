@@ -22,7 +22,19 @@ class TvShowsController < ApplicationController
   end
 
   def create
+    found = false
     @tv_show = TvShow.new(tv_show_params)
+
+    TvShow.all.each do |tv_show|
+      if tv_show.title == @tv_show.title
+        found = true
+
+
+      
+    end
+  end
+
+if found == false
 
     respond_to do |format|
       if @tv_show.save
@@ -33,27 +45,32 @@ class TvShowsController < ApplicationController
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
+    @user = current_user
+    @user.tv_shows_id.push(@tv_show.id.to_s)
+    @user.save
 
+  else 
+    redirect_to @tv_show, notice: 'tv_show was successfully created.'
+    
+
+    @user = current_user
+    @user.TvShows_id.push(TvShow.find_by_title(@tv_show.title).id.to_s)
+    @user.save
+    
   end
-  def update
-    respond_to do |format|
-      if @tv_show.update(tv_show_params)
-        format.html { redirect_to @tv_show, notice: 'tv_show was successfully updated.' }
-        format.json { render :show, status: :ok, location: @tv_show }
-      else
-        format.html { render :edit }
-        format.json { render json: @tv_show.errors, status: :unprocessable_entity }
-      end
-    end
+  
+
   end
 
   def destroy
-    @tv_show = tv_show.find(params[:id])
-    @tv_show.destroy
-    respond_to do |format|
-      format.html { redirect_to tv_shows_url, notice: 'tv_show was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    @tv_show = TvShow.find(params[:id])
+    user = current_user
+    user.tv_shows_id.delete(@tv_show.id)
+    user.save
+      respond_to do |format|
+        format.html { redirect_to tv_shows_url, notice: 'The show was successfully deleted.' }
+        format.json { head :no_content }
+      end
   end
 
   private

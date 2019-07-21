@@ -1,7 +1,8 @@
 class DashboardsController < ApplicationController
   def index
     if user_signed_in?
-    films = User.find(current_user.id).films_id
+      # debug
+    films = User.find_by(username: params[:user_id]).films_id
 
     @films = []
 
@@ -14,7 +15,7 @@ class DashboardsController < ApplicationController
 
 
 
-    games = User.find(current_user.id).games_id
+    games = User.find_by(username: params[:user_id]).games_id
 
     @games = []
 
@@ -26,7 +27,7 @@ class DashboardsController < ApplicationController
     
 
 
-    animes = User.find(current_user.id).animes_id
+    animes = User.find_by(username: params[:user_id]).animes_id
 
     @animes = []
 
@@ -37,7 +38,7 @@ class DashboardsController < ApplicationController
 
 
 
-    tv_shows = User.find(current_user.id).TvShows_id
+    tv_shows = User.find_by(username: params[:user_id]).TvShows_id
 
     @tv_shows = []
 

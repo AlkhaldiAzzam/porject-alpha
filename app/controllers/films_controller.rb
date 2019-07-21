@@ -38,7 +38,7 @@ if found == false
 
     respond_to do |format|
       if @film.save
-        format.html { redirect_to @film, notice: 'film was successfully created.' }
+        format.html { redirect_to dashboards_path, notice: 'film was successfully created.' }
         format.json { render :show, status: :created, location: @film }
       else
         format.html { render :new }
@@ -50,7 +50,7 @@ if found == false
     @user.save
 
   else 
-    redirect_to @film, notice: 'film was successfully created.'
+    redirect_to user_dashboards_path(current_user.username), notice: 'film was successfully created.'
     
 
     @user = current_user
@@ -63,7 +63,7 @@ end
   def update
     respond_to do |format|
       if @film.update(film_params)
-        format.html { redirect_to @film, notice: 'film was successfully updated.' }
+        format.html { redirect_to user_dashboards_path(current_user.username), notice: 'film was successfully updated.' }
         format.json { render :show, status: :ok, location: @film }
       else
         format.html { render :edit }
@@ -78,7 +78,7 @@ end
   user.films_id.delete(@film.id)
   user.save
     respond_to do |format|
-      format.html { redirect_to films_url, notice: 'Film was successfully destroyed.' }
+      format.html { redirect_to dashboards_path, notice: 'Film was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

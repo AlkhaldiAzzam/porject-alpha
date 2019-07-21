@@ -38,7 +38,7 @@ if found == false
 
     respond_to do |format|
       if @tv_show.save
-        format.html { redirect_to @tv_show, notice: 'tv_show was successfully created.' }
+        format.html { redirect_to user_dashboards_path(current_user.username), notice: 'tv_show was successfully created.' }
         format.json { render :show, status: :created, location: @tv_show }
       else
         format.html { render :new }
@@ -46,11 +46,11 @@ if found == false
       end
     end
     @user = current_user
-    @user.tv_shows_id.push(@tv_show.id.to_s)
+    @user.TvShows_id.push(@tv_show.id.to_s)
     @user.save
 
   else 
-    redirect_to @tv_show, notice: 'tv_show was successfully created.'
+    redirect_to user_dashboards_path(current_user.username), notice: 'tv_show was successfully created.'
     
 
     @user = current_user
@@ -65,10 +65,10 @@ if found == false
   def destroy
     @tv_show = TvShow.find(params[:id])
     user = current_user
-    user.tv_shows_id.delete(@tv_show.id)
+    user.TvShows_id.delete(@tv_show.id)
     user.save
       respond_to do |format|
-        format.html { redirect_to tv_shows_url, notice: 'The show was successfully deleted.' }
+        format.html { redirect_to user_dashboards_path(current_user.username), notice: 'The show was successfully deleted.' }
         format.json { head :no_content }
       end
   end

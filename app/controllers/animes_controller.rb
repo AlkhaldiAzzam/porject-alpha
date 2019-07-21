@@ -30,28 +30,18 @@ class AnimesController < ApplicationController
       if anime.title == @anime.title
         found = true
 
-
-      
     end
   end
 
 if found == false
-
-    respond_to do |format|
-      if @anime.save
-        format.html { redirect_to @anime, notice: 'anime was successfully created.' }
-        format.json { render :show, status: :created, location: @anime }
-      else
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
-    end
+    @anime.save
+    redirect_to user_dashboards_path(current_user.username), notice: 'anime was successfully added.'
     @user = current_user
     @user.animes_id.push(@anime.id.to_s)
     @user.save
 
   else 
-    redirect_to @anime, notice: 'anime was successfully created.'
+    redirect_to user_dashboards_path(current_user.username), notice: 'anime was successfully created.'
     
 
     @user = current_user
@@ -80,7 +70,7 @@ if found == false
   user.animes_id.delete(@anime.id)
   user.save
     respond_to do |format|
-      format.html { redirect_to animes_url, notice: 'anime was successfully destroyed.' }
+      format.html { redirect_to user_dashboards_path(current_user.username), notice: 'anime was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

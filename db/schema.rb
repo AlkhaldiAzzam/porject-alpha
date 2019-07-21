@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_19_201815) do
+ActiveRecord::Schema.define(version: 2019_07_21_081926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 2019_07_19_201815) do
     t.string "poster"
     t.string "trailer"
     t.text "plot"
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "imdb_link"
@@ -83,6 +82,7 @@ ActiveRecord::Schema.define(version: 2019_07_19_201815) do
     t.integer "animes_id", default: [], array: true
     t.integer "games_id", default: [], array: true
     t.integer "TvShows_id", default: [], array: true
+    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -1,0 +1,406 @@
+
+
+
+<div>
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3" style = "text-align: center">
+        <h1>Movies</h1>
+		</div>
+		<div class="col-md-3" style = "text-align: center">
+        <h1>Games</h1>
+		</div>
+		<div class="col-md-3" style = "text-align: center">
+        <h1>Animes</h1>
+		</div>
+		<div class="col-md-3" style = "text-align: center">
+        <h1>TV Shows</h1>
+		</div>
+	</div>
+</div>
+
+</div>
+
+
+
+
+
+<div style= "height: auto;  border: 2px solid black; margin: 9px; padding: 5px">
+
+<div class="container-fluid" >
+	<div class="row">
+		<div class="col-md-12">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+
+
+
+<table>
+ 
+  <div >
+    <% @films.each do |film| %>
+      <div >
+
+
+<div id="accordion">
+  <div class="card">
+    <div class="card-header btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="headingOne" style= "text-align: center; margin: 8px">
+      <h5 class="mb-0">
+        <h5>
+          <%= film.title%>
+        </h5>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        
+
+     <div class="card" style="width: 18rem;">
+  <img src=<%= film.poster%> class="card-img-top" alt="..." style ="width: 286px; height: 330px">
+  <div class="card-body">
+    <h5 class="card-title"><%= film.title%></h5>
+    <div id="accordion">
+  <div class="card">
+    <div class="card-header " id="headingOne">
+      <h5 class="mb-0">
+        <button  class="btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          Plot
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <%= film.plot%>
+      </div>
+    </div>
+  </div>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Rating: <%= film.rating%></li>
+  </ul>
+  <div class="card-body">
+    <a href=<%= film.imdb_link%> class="card-link">IMDb Page</a>
+  </div>
+
+  <div class="card-body">
+    <%if user_signed_in? && current_user.films_id.include?(film.id)%> 
+        <p style= "color: grey">Added</p>
+
+        <%else%>
+
+        <%= link_to 'Add to your list', "add_film#{film.id}" %>
+        <%end%>
+  </div>
+</div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+     
+      </div>
+    <% end %>
+  </div>
+</table>
+
+<br>
+
+
+
+
+
+
+		</div>
+		<div class="col-md-3">
+
+
+
+
+<table>
+  
+  <tbody>
+    <% @games.each do |game| %>
+      <tr>
+
+
+<div id="accordion">
+  <div class="card">
+    <div class="card-header btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="headingOne" style= "text-align: center; margin: 8px">
+      <h5 class="mb-0">
+        <h5>
+          <%= game.title%>
+        </h5>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        
+
+     <div class="card" style="width: 18rem;">
+  <img src=<%= game.poster%> class="card-img-top" alt="..." style ="width: 286px; height: 330px">
+  <div class="card-body">
+    <h5 class="card-title"><%= game.title%></h5>
+    <div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+
+        <button class="btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          Plot
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <%= game.plot%>
+      </div>
+    </div>
+  </div>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Rating: <%= game.rating%></li>
+  </ul>
+  <div class="card-body">
+    <a href=<%= game.imdb_link%> class="card-link">IMDb Page</a>
+  </div>
+
+  <div class="card-body">
+    
+ <%if user_signed_in? && current_user.games_id.include?(game.id)%> 
+        <p style= "color: grey">Added</p>
+
+        <%else%>
+
+    <p>Add to you list</p>
+        <%= link_to 'Add to your list', "add_game#{game.id}" %>
+       
+        <%end%>
+        
+
+  </div>
+</div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+     
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+
+
+
+		</div>
+		<div class="col-md-3">
+
+
+<table>
+  <thead>
+  
+  </thead>
+
+  <tbody>
+    <% @animes.each.with_index do |anime | %>
+      <tr>
+
+
+<div id="accordion">
+  <div class="card">
+    <div class="card-header btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="headingOne" style= "text-align: center; margin: 8px">
+      <h5 class="mb-0">
+        <h5>
+          <%= anime.title%>
+        </h5>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        
+
+     <div class="card" style="width: 18rem;">
+  <img src=<%= anime.poster%> class="card-img-top" alt="..." style ="width: 286px; height: 330px">
+  <div class="card-body">
+    <h5 class="card-title"><%= anime.title%></h5>
+    <div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+
+        <button class="btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          Plot
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <%= anime.plot%>
+      </div>
+    </div>
+  </div>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Rating: <%= anime.rating%></li>
+  </ul>
+  <div class="card-body">
+    <a href=<%= anime.imdb_link%> class="card-link">IMDb Page</a>
+  </div>
+
+  <div class="card-body">
+      <%if user_signed_in? && current_user.animes_id.include?(anime.id)%> 
+        <p style= "color: grey">Added</p>
+
+        <%else%>
+
+        <%= link_to 'Add to your list', "add_anime#{anime.id}" %>
+        
+        <%end%>
+  </div>
+</div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+     
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%# <%= link_to 'New Post', new_post_path %> 
+
+
+
+		</div>
+		<div class="col-md-3">
+
+<table>
+  <thead>
+  
+  </thead>
+
+  <tbody>
+    <% @tv_shows.each.with_index do |tv_show | %>
+      <tr>
+
+
+<div id="accordion">
+  <div class="card">
+    <div class="card-header btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="headingOne" style= "text-align: center; margin: 8px">
+      <h5 class="mb-0">
+        <h5>
+          <%= tv_show.title%>
+        </h5>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        
+
+     <div class="card" style="width: 18rem;">
+  <img src=<%= tv_show.poster%> class="card-img-top" alt="..." style ="width: 286px; height: 330px">
+  <div class="card-body">
+    <h5 class="card-title"><%= tv_show.title%></h5>
+    <div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+
+        <button class="btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          Plot
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <%= tv_show.plot%>
+      </div>
+    </div>
+  </div>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Rating: <%= tv_show.rating%></li>
+  </ul>
+  <div class="card-body">
+    <a href=<%= tv_show.imdb_link%> class="card-link">IMDb Page</a>
+  </div>
+
+  <div class="card-body">
+     <%if user_signed_in? && current_user.TvShows_id.include?(tv_show.id)%> 
+        <p style= "color: grey">Added</p>
+
+        <%else%>
+
+        <%= link_to 'Add to your list', "add_show#{tv_show.id}" %>
+        
+        <%end%>
+  </div>
+</div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+     
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+
+
+		</div>
+	</div>
+</div>
+</div>

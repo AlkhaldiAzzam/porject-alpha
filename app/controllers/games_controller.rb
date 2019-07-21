@@ -33,7 +33,7 @@ if found == false
 
     respond_to do |format|
       if @game.save
-        format.html { redirect_to @game, notice: 'game was successfully created.' }
+        format.html { redirect_to user_dashboards_path(current_user.username), notice: 'game was successfully created.' }
         format.json { render :show, status: :created, location: @game }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ if found == false
     @user.save
 
   else 
-    redirect_to @game, notice: 'game was successfully created.'
+    redirect_to dashboards_path, notice: 'game was successfully created.'
     
 
     @user = current_user
@@ -61,7 +61,7 @@ if found == false
   def update
     respond_to do |format|
       if @game.update(game_params)
-        format.html { redirect_to @game, notice: 'game was successfully updated.' }
+        format.html { redirect_to user_dashboards_path(current_user.username), notice: 'game was successfully updated.' }
         format.json { render :show, status: :ok, location: @game }
       else
         format.html { render :edit }
@@ -78,7 +78,7 @@ if found == false
   user.games_id.delete(@game.id)
   user.save
     respond_to do |format|
-      format.html { redirect_to games_url, notice: 'game was successfully destroyed.' }
+      format.html { redirect_to user_dashboards_path(current_user.username), notice: 'game was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -89,7 +89,7 @@ if found == false
   end
 
   def game_params
-    params.require(:game).permit(:title, :plot, :user_id , :rating , :poster , :trailer, :imdb_link )
+    params.require(:game).permit(:title, :plot , :rating , :poster , :trailer, :imdb_link )
   end
 
 end

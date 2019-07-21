@@ -1,28 +1,31 @@
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-
-<%= link_to('Home', dashboards_path,class: "nav-link navbar-brand") %>
+<% if current_user%>
+<%= link_to('Home', user_dashboards_path(current_user.username),class: "nav-link navbar-brand") %>
+  <% end %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
       
-      <li class="nav-item">
-          <%= link_to('New Film', new_film_path , class:"nav-link navbar-brand")%>
+        <li class="nav-item">
+          <%= link_to('Explore', explore_index_path , class:"nav-link navbar-brand")%>
       </li>
 
-      <li class="nav-item">
-          <%= link_to('New Game', new_game_path , class:"nav-link navbar-brand")%>
-      </li>
 
-       <li class="nav-item">
-          <%= link_to('New Anime', new_anime_path , class:"nav-link navbar-brand")%>
-      </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">New</a>
+    <div class="dropdown-menu">
+        <%= link_to('New Film', new_film_path , class:"dropdown-item ")%>
+        <%= link_to('New Game', new_game_path , class:"dropdown-item ")%>
+        <%= link_to('New Anime', new_anime_path , class:"dropdown-item ")%>
+        <%= link_to('New TV Show', new_tv_show_path , class:"dropdown-item ")%>
 
-       <li class="nav-item">
-          <%= link_to('New TV Show', new_tv_show_path , class:"nav-link navbar-brand")%>
-      </li>
+      
+      
+    </div>
+
 
    
       </li>

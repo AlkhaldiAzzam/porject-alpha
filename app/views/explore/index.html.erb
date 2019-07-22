@@ -1,6 +1,5 @@
 
 
-
 <div>
 
 
@@ -42,13 +41,13 @@
 <table>
  
   <div >
-    <% @films.each do |film| %>
+    <% @films.each.with_index do |film, i| %>
       <div >
 
 
 <div id="accordion">
   <div class="card">
-    <div class="card-header btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="headingOne" style= "text-align: center; margin: 8px">
+    <div class="card-header btn collapsed" data-toggle="collapse" data-target="#collapse<%= i %>film" aria-expanded="false" aria-controls="collaipse<%= i %>" id="headingOne" style= "text-align: center; margin: 8px">
       <h5 class="mb-0">
         <h5>
           <%= film.title%>
@@ -56,7 +55,7 @@
       </h5>
     </div>
 
-    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+    <div id="collapse<%= i %>film" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
       <div class="card-body">
         
 
@@ -64,24 +63,9 @@
   <img src=<%= film.poster%> class="card-img-top" alt="..." style ="width: 286px; height: 330px">
   <div class="card-body">
     <h5 class="card-title"><%= film.title%></h5>
-    <div id="accordion">
-  <div class="card">
-    <div class="card-header " id="headingOne">
-      <h5 class="mb-0">
-        <button  class="btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          Plot
-        </button>
-      </h5>
-    </div>
 
-    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-      <div class="card-body">
-        <%= film.plot%>
-      </div>
-    </div>
-  </div>
-  </div>
-  <ul class="list-group list-group-flush">
+    <p class="card-text"><%= film.plot %></p>
+      <ul class="list-group list-group-flush">
     <li class="list-group-item">Rating: <%= film.rating%></li>
   </ul>
   <div class="card-body">
@@ -89,12 +73,14 @@
   </div>
 
   <div class="card-body">
-    <%if user_signed_in? && current_user.films_id.include?(film.id)%> 
+
+  <% if user_signed_in?  %>
+  <%if current_user.films_id.include?(film.id)%> 
         <p style= "color: grey">Added</p>
 
-        <%else%>
-
+        <% else %>
         <%= link_to 'Add to your list', "add_film#{film.id}" %>
+        <%end%>
         <%end%>
   </div>
 </div>
@@ -132,13 +118,13 @@
 <table>
   
   <tbody>
-    <% @games.each do |game| %>
+    <% @games.each.with_index do |game, i| %>
       <tr>
 
 
 <div id="accordion">
   <div class="card">
-    <div class="card-header btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="headingOne" style= "text-align: center; margin: 8px">
+    <div class="card-header btn collapsed" data-toggle="collapse" data-target="#collapse<%= i %>game" aria-expanded="false" aria-controls="collaipse<%=  i%>" id="headingOne" style= "text-align: center; margin: 8px">
       <h5 class="mb-0">
         <h5>
           <%= game.title%>
@@ -146,7 +132,7 @@
       </h5>
     </div>
 
-    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+    <div id="collapse<%= i %>game" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
       <div class="card-body">
         
 
@@ -154,24 +140,7 @@
   <img src=<%= game.poster%> class="card-img-top" alt="..." style ="width: 286px; height: 330px">
   <div class="card-body">
     <h5 class="card-title"><%= game.title%></h5>
-    <div id="accordion">
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-
-        <button class="btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          Plot
-        </button>
-      </h5>
-    </div>
-
-    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-      <div class="card-body">
-        <%= game.plot%>
-      </div>
-    </div>
-  </div>
-  </div>
+    <p class="card-text"><%= game.plot %></p>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">Rating: <%= game.rating%></li>
   </ul>
@@ -181,14 +150,11 @@
 
   <div class="card-body">
     
- <%if user_signed_in? && current_user.games_id.include?(game.id)%> 
+  <%if user_signed_in? && current_user.games_id.include?(game.id)%> 
         <p style= "color: grey">Added</p>
 
-        <%else%>
-
-    <p>Add to you list</p>
+        <% else %>
         <%= link_to 'Add to your list', "add_game#{game.id}" %>
-       
         <%end%>
         
 
@@ -228,13 +194,12 @@
   </thead>
 
   <tbody>
-    <% @animes.each.with_index do |anime | %>
+    <% @animes.each.with_index do |anime , i | %>
       <tr>
-
 
 <div id="accordion">
   <div class="card">
-    <div class="card-header btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="headingOne" style= "text-align: center; margin: 8px">
+    <div class="card-header btn collapsed" data-toggle="collapse" data-target="#collapse<%= i %>anime" aria-expanded="false" aria-controls="collaipse<%= i %>" id="headingOne" style= "text-align: center; margin: 8px">
       <h5 class="mb-0">
         <h5>
           <%= anime.title%>
@@ -242,7 +207,7 @@
       </h5>
     </div>
 
-    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+    <div id="collapse<%= i %>anime" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
       <div class="card-body">
         
 
@@ -250,24 +215,7 @@
   <img src=<%= anime.poster%> class="card-img-top" alt="..." style ="width: 286px; height: 330px">
   <div class="card-body">
     <h5 class="card-title"><%= anime.title%></h5>
-    <div id="accordion">
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-
-        <button class="btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          Plot
-        </button>
-      </h5>
-    </div>
-
-    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-      <div class="card-body">
-        <%= anime.plot%>
-      </div>
-    </div>
-  </div>
-  </div>
+   <p class="card-text"><%= anime.plot %></p>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">Rating: <%= anime.rating%></li>
   </ul>
@@ -276,13 +224,11 @@
   </div>
 
   <div class="card-body">
-      <%if user_signed_in? && current_user.animes_id.include?(anime.id)%> 
+     <%if user_signed_in? && current_user.animes_id.include?(anime.id)%> 
         <p style= "color: grey">Added</p>
 
-        <%else%>
-
+        <% else %>
         <%= link_to 'Add to your list', "add_anime#{anime.id}" %>
-        
         <%end%>
   </div>
 </div>
@@ -319,13 +265,13 @@
   </thead>
 
   <tbody>
-    <% @tv_shows.each.with_index do |tv_show | %>
+    <% @tv_shows.each.with_index do |tv_show  , i | %>
       <tr>
 
 
 <div id="accordion">
   <div class="card">
-    <div class="card-header btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="headingOne" style= "text-align: center; margin: 8px">
+    <div class="card-header btn collapsed" data-toggle="collapse" data-target="#collapse<%= i %>tv" aria-expanded="false" aria-controls="collaipse<%= i %>" id="headingOne" style= "text-align: center; margin: 8px">
       <h5 class="mb-0">
         <h5>
           <%= tv_show.title%>
@@ -333,7 +279,7 @@
       </h5>
     </div>
 
-    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+    <div id="collapse<%= i %>tv" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
       <div class="card-body">
         
 
@@ -341,24 +287,7 @@
   <img src=<%= tv_show.poster%> class="card-img-top" alt="..." style ="width: 286px; height: 330px">
   <div class="card-body">
     <h5 class="card-title"><%= tv_show.title%></h5>
-    <div id="accordion">
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-
-        <button class="btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          Plot
-        </button>
-      </h5>
-    </div>
-
-    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-      <div class="card-body">
-        <%= tv_show.plot%>
-      </div>
-    </div>
-  </div>
-  </div>
+    <p class="card-text"><%= tv_show.plot %></p>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">Rating: <%= tv_show.rating%></li>
   </ul>
@@ -367,13 +296,12 @@
   </div>
 
   <div class="card-body">
+     
      <%if user_signed_in? && current_user.TvShows_id.include?(tv_show.id)%> 
         <p style= "color: grey">Added</p>
 
-        <%else%>
-
+        <% else %>
         <%= link_to 'Add to your list', "add_show#{tv_show.id}" %>
-        
         <%end%>
   </div>
 </div>
@@ -397,7 +325,7 @@
 
 <br>
 
-
+<%# <%= link_to 'New Post', new_post_path %> 
 
 
 		</div>

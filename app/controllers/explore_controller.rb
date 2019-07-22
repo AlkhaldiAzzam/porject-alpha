@@ -5,6 +5,8 @@ class ExploreController < ApplicationController
     @animes = Anime.all
     @tv_shows = TvShow.all
 
+    @user = current_user
+
 
     
   end

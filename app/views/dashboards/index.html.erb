@@ -74,8 +74,8 @@
 
   <div class="card-body">
     <%if user_signed_in? && current_user.films_id.include?(film.id)%> 
-        <%= link_to 'Edit', edit_film_path(film) %> | 
-        <%= link_to 'Destroy', film, method: :delete, data: { confirm: 'Are you sure?' } %>
+         
+        <%= link_to 'Remove from list', film, method: :delete, data: { confirm: 'Are you sure?' } %>
         <%end%>
   </div>
 </div>
@@ -146,8 +146,8 @@
   <div class="card-body">
     
     <%if user_signed_in? && current_user.games_id.include?(game.id)%> 
-        <%= link_to 'Edit', edit_game_path(game) %> | 
-        <%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %>
+        
+        <%= link_to 'Remove from list', game, method: :delete, data: { confirm: 'Are you sure?' } %>
         <%end%>
         
 
@@ -218,8 +218,8 @@
 
   <div class="card-body">
      <% if user_signed_in? && current_user.animes_id.include?(anime.id)%>
-        <%= link_to 'Edit', edit_anime_path(anime) %> | 
-        <%= link_to 'Destroy', anime, method: :delete, data: { confirm: 'Are you sure?' } %>
+        
+        <%= link_to 'Remove from list', anime, method: :delete, data: { confirm: 'Are you sure?' } %>
         <%end%>
   </div>
 </div>
@@ -288,8 +288,8 @@
 
   <div class="card-body">
      <% if user_signed_in? && current_user.TvShows_id.include?(tv_show.id)%>
-        <%= link_to 'Edit', edit_tv_show_path(tv_show) %> | 
-        <%= link_to 'Destroy', tv_show, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+        <%= link_to 'Remove from list', tv_show, method: :delete, data: { confirm: 'Are you sure?' } %>
         <%end%>
   </div>
 </div>

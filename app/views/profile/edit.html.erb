@@ -1,3 +1,7 @@
 <%= render 'profile/form'%>
 
-<%= link_to 'Back', '/profile/:user_id' %>
+<div class="container">
+
+<%= button_to 'Back', '/profile/:user_id' , class: "btn btn-dark" %>
+    <%= button_to 'Edit credentials' , edit_user_registration_path	, class: "btn btn-dark" %>
+</div>

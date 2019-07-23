@@ -37,7 +37,9 @@
                 <div class="description text-center">
                     <p><%= @user.bio %></p>
                 </div>
-				
+                <div class = "container">
+                <%= button_to "Edit Profile" , "/profile/#{current_user.username}/edit" ,  class: "btn btn-dark" %>
+				</div>
         
 
 

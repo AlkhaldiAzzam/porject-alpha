@@ -30,6 +30,9 @@ Rails.application.routes.draw do
   get '/profile/:user_id', to: "profile#index"
   get '/profile/:user_id/edit', to: "profile#edit"
   patch '/profile/:user_id/update', to: "profile#update"
+  post '/profile/:user_id/edit' , to: "profile#edit"
+  post '/users/edit' , to: "users#edit"
+
   resources :users do
     # get 'profile' , to: 'profile#index'
     

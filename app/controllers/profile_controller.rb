@@ -10,7 +10,7 @@ class ProfileController < ApplicationController
   def update
 
     @user = current_user    
-    @user.update_attributes(:first_name => params[:user][:first_name], :last_name => params[:user][:last_name])
+    @user.update_attributes(:first_name => params[:user][:first_name], :last_name => params[:user][:last_name], :bio => params[:user][:bio], :img => params[:user][:img])
     redirect_to "/profile/#{current_user.username}"
   end
 

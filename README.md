@@ -32,11 +32,25 @@
 
 # Screen Shots:
 
-- ![screenshot 1](/screenshots/ScreenShot1.png)
+- Your profile edit page
+
+![screenshot 1](/screenshots/ScreenShot1.png)
 
 
-- ![screenshot 1](/screenshots/ScreenShot2.png)
+- Your home page
+![screenshot 1](/screenshots/ScreenShot2.png)
+- Your profile page
 
-- ![screenshot 1](/screenshots/ScreenShot3.png)
+![screenshot 1](/screenshots/ScreenShot3.png)
+- Your explore page
 
-- ![screenshot 1](/screenshots/ScreenShot4.png)
+![screenshot 1](/screenshots/ScreenShot4.png)
+
+
+
+# Future plans:
+- adding the comparison feature
+- adding other pages for the "Hate list"
+- adding a notification system
+- adding API
+- adding messaging system

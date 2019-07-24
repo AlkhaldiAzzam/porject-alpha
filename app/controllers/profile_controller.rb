@@ -1,4 +1,9 @@
 class ProfileController < ApplicationController
+
+
+  before_action :check_if_owner, only: [:edit, :update, :destroy] 
+
+
   def index
     @user = User.find_by(username: params[:user_id])
   end
@@ -14,5 +19,43 @@ class ProfileController < ApplicationController
     redirect_to "/profile/#{current_user.username}"
   end
 
+  def follow
+    follower = User.find_by(username: params[:username])
+    followee = current_user
 
+    follower.followers.push(followee.id)
+    followee.followees.push(follower.id)
+
+    follower.save
+    followee.save
+    redirect_to request.referer
+  end
+
+  def unfollow
+    follower = User.find_by(username: params[:username])
+    followee = current_user
+
+    follower.followers.delete(followee.id)
+    followee.followees.delete(follower.id)
+
+    follower.save
+    followee.save
+    redirect_to request.referer
+  end
+
+
+
+
+
+
+  protected
+
+  def check_if_owner
+        @user = User.find_by(username: params[:user_id])
+        
+        if current_user.id != @user.id
+
+            redirect_to root_path
+        end
+    end
 end

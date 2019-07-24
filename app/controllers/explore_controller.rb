@@ -1,9 +1,31 @@
 class ExploreController < ApplicationController
   def index
-    @films = Film.all
-    @games = Game.all
-    @animes = Anime.all
-    @tv_shows = TvShow.all
+    if params[:search]
+      @films = Film.where('title ILIKE ?', "%#{params[:search]}%")
+    else
+      @films = Film.all
+    end
+
+
+    if params[:search]
+      @games = Game.where('title ILIKE ?', "%#{params[:search]}%")
+    else
+      @games = Game.all
+    end
+
+
+    if params[:search]
+      @animes = Anime.where('title ILIKE ?', "%#{params[:search]}%")
+    else
+      @animes = Anime.all
+    end
+    
+
+     if params[:search]
+      @tv_shows = TvShow.where('title ILIKE ?', "%#{params[:search]}%")
+    else
+      @tv_shows = TvShow.all
+    end
 
     @user = current_user
 
@@ -17,7 +39,7 @@ class ExploreController < ApplicationController
     user.films_id.push(params[:id].to_i)
     user.save
     
-    redirect_to explore_index_path	, notice: 'film was successfully added.'
+    redirect_to explore_path	, notice: 'film was successfully added.'
   end
 
   def add_game
@@ -25,7 +47,7 @@ class ExploreController < ApplicationController
     user.games_id.push(params[:id].to_i)
     user.save
     
-    redirect_to explore_index_path	, notice: 'game was successfully added.'
+    redirect_to explore_path	, notice: 'game was successfully added.'
   end
 
   def add_anime
@@ -33,7 +55,7 @@ class ExploreController < ApplicationController
     user.animes_id.push(params[:id].to_i)
     user.save
     
-    redirect_to explore_index_path	, notice: 'anime was successfully added.'
+    redirect_to explore_path	, notice: 'anime was successfully added.'
   end
 
 
@@ -42,7 +64,7 @@ class ExploreController < ApplicationController
     user.TvShows_id.push(params[:id].to_i)
     user.save
     
-    redirect_to explore_index_path	, notice: 'show was successfully added.'
+    redirect_to explore_path	, notice: 'show was successfully added.'
   end
 
 

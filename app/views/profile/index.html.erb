@@ -2,19 +2,12 @@
 
 
 <!------ Include the above in your HEAD tag ---------->
-<head>
-    
-  
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-   
-    
-</head>
+
 
 <body class="profile-page">
    
 
-   
-    
+
     <div class="page-header header-filter" data-parallax="true" style="background-image:url('http://wallpapere.org/wp-content/uploads/2012/02/black-and-white-city-night.png');"></div>
     <div class="main main-raised">
 		<div class="profile-content">
@@ -22,6 +15,7 @@
                 <div class="row">
 	                <div class="col-md-6 ml-auto mr-auto">
         	           <div class="profile">
+                     
 	                        <div class="avatar ">
 	                            <%= image_tag @user.img,size: "200x150", :class => "rounded-circle"%>
 	                        </div>
@@ -38,11 +32,33 @@
                     <p><%= @user.bio %></p>
                 </div>
                 <div class = "container">
+
+
+    <h3>Following: <%= current_user.followees.length %>  , Followers: <%= current_user.followers.length %> </h3>
+
+<% if current_user.username !=  params[:user_id] %>
+
+<% if current_user.followees.include?(User.find_by(username: params[:user_id]).id)  %>
+
+  <%= link_to 'Unfollow', "/unfollow/#{params[:user_id]}" %>
+  <% else  %>
+  <%= link_to 'Follow', "/follow/#{params[:user_id]}" %>
+<%end  %>
+
+
+    <div>
+    
+    <%= link_to "Visit his dashboard" , user_dashboards_path(params[:user_id]) %>
+    </div>
+
+<% else  %>
+
+
+
                 <%= button_to "Edit Profile" , "/profile/#{current_user.username}/edit" ,  class: "btn btn-dark" %>
 				</div>
+<%end  %>
         
-
-
 
 
 
@@ -51,16 +67,16 @@
           <div class="tab-content tab-space">
             <div class="tab-pane active text-center gallery" >
   				<div class="row">
-  					<div class="col-md-3 ml-auto">
+  					<div class="col-md-3 ml-auto ">
             <% if !@user.films_id.empty? %>
-  <%= image_tag Film.find(@user.films_id.sample).poster , size: "220x330" %>
+  <%= image_tag Film.find(@user.films_id.sample).poster , size: "220x330" , class:"border border-secondary" %>
 
     <% end %>
 
   					</div>
   					<div class="col-md-3 mr-auto">
-            <% if !@user.films_id.empty? %>
-  <%= image_tag Game.find(@user.games_id.sample).poster , size: "220x330" %>
+            <% if !@user.games_id.empty? %>
+  <%= image_tag Game.find(@user.games_id.sample).poster , size: "220x330" , class:"border border-secondary" %>
 <%  end %>
   					</div>
 
@@ -75,13 +91,13 @@
 
       				<div class="col-md-3 ml-auto">
               <% if !@user.TvShows_id.empty?  %>
-        <%= image_tag TvShow.find(@user.TvShows_id.sample).poster , size: "220x330"%>
+        <%= image_tag TvShow.find(@user.TvShows_id.sample).poster , size: "220x330"  , class:"border border-secondary"%>
         <%end  %>
       				</div>
               
       				<div class="col-md-3 mr-auto">
               <% if  !@user.animes_id.empty? %>
-          <%= image_tag Anime.find(@user.animes_id.sample).poster , size: "220x330"%>
+          <%= image_tag Anime.find(@user.animes_id.sample).poster , size: "220x330"  , class:"border border-secondary"%>
                      <% end  %>
       			</div>
   			</div>

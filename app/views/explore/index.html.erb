@@ -2,7 +2,18 @@
 
 <div>
 
+</div>
 
+
+<div>
+<div class= "row">
+<div class="m-auto">
+<%= form_tag(explore_path ,:method => 'get') do %>
+   <%= text_field_tag :search ,params[:search] %>
+  <%= submit_tag 'Search' ,class:"btn btn-secondary my-2 my-sm-0" %>
+<% end %>
+</div>
+</div>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-3" style = "text-align: center">
@@ -47,7 +58,7 @@
 
 <div id="accordion">
   <div class="card">
-    <div class="card-header btn collapsed" data-toggle="collapse" data-target="#collapse<%= i %>film" aria-expanded="false" aria-controls="collaipse<%= i %>" id="headingOne" style= "text-align: center; margin: 8px">
+    <div class="card-header btn collapsed btn-danger" data-toggle="collapse" data-target="#collapse<%= i %>film" aria-expanded="false" aria-controls="collaipse<%= i %>" id="headingOne" style= "text-align: center; margin: 8px">
       <h5 class="mb-0">
         <h5>
           <%= film.title%>
@@ -124,7 +135,7 @@
 
 <div id="accordion">
   <div class="card">
-    <div class="card-header btn collapsed" data-toggle="collapse" data-target="#collapse<%= i %>game" aria-expanded="false" aria-controls="collaipse<%=  i%>" id="headingOne" style= "text-align: center; margin: 8px">
+    <div class="card-header btn collapsed btn-danger" data-toggle="collapse" data-target="#collapse<%= i %>game" aria-expanded="false" aria-controls="collaipse<%=  i%>" id="headingOne" style= "text-align: center; margin: 8px">
       <h5 class="mb-0">
         <h5>
           <%= game.title%>
@@ -199,7 +210,7 @@
 
 <div id="accordion">
   <div class="card">
-    <div class="card-header btn collapsed" data-toggle="collapse" data-target="#collapse<%= i %>anime" aria-expanded="false" aria-controls="collaipse<%= i %>" id="headingOne" style= "text-align: center; margin: 8px">
+    <div class="card-header btn collapsed btn-danger" data-toggle="collapse" data-target="#collapse<%= i %>anime" aria-expanded="false" aria-controls="collaipse<%= i %>" id="headingOne" style= "text-align: center; margin: 8px">
       <h5 class="mb-0">
         <h5>
           <%= anime.title%>
@@ -271,7 +282,7 @@
 
 <div id="accordion">
   <div class="card">
-    <div class="card-header btn collapsed" data-toggle="collapse" data-target="#collapse<%= i %>tv" aria-expanded="false" aria-controls="collaipse<%= i %>" id="headingOne" style= "text-align: center; margin: 8px">
+    <div class="card-header btn collapsed btn-danger" data-toggle="collapse" data-target="#collapse<%= i %>tv" aria-expanded="false" aria-controls="collaipse<%= i %>" id="headingOne" style= "text-align: center; margin: 8px">
       <h5 class="mb-0">
         <h5>
           <%= tv_show.title%>

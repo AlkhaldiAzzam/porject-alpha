@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
 
+  get 'search/index'
   root 'explore#index'
  
   
   post "/profile/index/edit" ,to: "profile#update"
-  resources :explore 
+
+  get "/explore" , to: "explore#index"
+
+  
+
   resources :dashboards
   resources :films
   resources :games
@@ -33,6 +38,11 @@ Rails.application.routes.draw do
   post '/profile/:user_id/edit' , to: "profile#edit"
   post '/users/edit' , to: "users#edit"
 
+
+  get '/follow/:username'  , to: "profile#follow"
+  get '/unfollow/:username'  , to: "profile#unfollow"
+
+  # post 'users/:username/dashboard' , to: "dashboards#index"
   resources :users do
     # get 'profile' , to: 'profile#index'
     
@@ -42,7 +52,6 @@ Rails.application.routes.draw do
     resources :animes
     resources :tv_shows
     # resources :dashboards
-    resources :explore
     get '/dashboards', to: 'dashboards#index'
     
 

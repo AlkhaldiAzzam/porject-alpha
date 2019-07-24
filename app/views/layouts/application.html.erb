@@ -3,6 +3,7 @@
 
   <head>
 <link href="https://fonts.googleapis.com/css?family=Montserrat:300|Open+Sans:300" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
 
     <title>PorjectAlpha</title>
    
@@ -16,6 +17,34 @@
   <body style= "align-content: center;  ">
 
   <%= render 'layouts/nav'%>
+
+  <div>
+<%if user_signed_in?  %>
+
+<div class="row ml-4">
+
+<div class="m-auto">
+  <%  current_user.followees.each do |followee| %>
+
+
+ <%= link_to image_tag(current_user.img,size: "30x30", :class => "rounded-circle m-1"), "/profile/#{User.find(followee).username}" %> 
+  <%end  %>
+  
+</div>
+
+</div>
+
+ 
+  
+  
+  
+  
+  
+  
+  
+  <%end  %>
+  
+  </div>
   
     <%= yield %>
   </body>

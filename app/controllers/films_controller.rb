@@ -1,6 +1,6 @@
 class FilmsController < ApplicationController
 
-  before_action :authenticate_user!
+  
 
 
   def index
@@ -78,7 +78,7 @@ end
   user.films_id.delete(@film.id)
   user.save
     respond_to do |format|
-      format.html { redirect_to dashboards_path, notice: 'Film was successfully destroyed.' }
+      format.html { redirect_to user_dashboards_path(current_user.username), notice: 'Film was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
